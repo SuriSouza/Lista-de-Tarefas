@@ -5,64 +5,20 @@
 #include "todolist.h"
 
 // Primeira interação com o usuário: Menu Inicial
-/*void menuInicial()
-{
-	int opcao;
 
-	printf("1 - Adicionar Lista de Tarefas\n");
-	printf("2 - Remover Lista de Tarefas\n");
-	printf("3 - Abrir Lista de Tarefas\n");
-	printf("4 - Listar Tarefas de um Período\n\n");
-	scanf("%d", &opcao);
-
-	if (opcao == 1)
-	{
-		criarLista();
-	}
-
-	else
-	{
-		printf("Opcao inválida!\n");
-	}
+void lerDados(TDado *dado){
+	printf("Adicione uma descricao de ate 50 caracteres:\n");
+	__fpurge(stdin);
+	fgets(dado->descricao, 50, stdin);
 }
-*/
-/*
-// void criarLista()
-// {
-// 	Tarefas *lista = (Tarefas*) malloc(sizeof(Tarefas));
-//
-// 	if(lista == NULL)
-// 	{
-// 		printf("\nFalha ao alocar memoria!\n");
-// 	}
-//
-// 	printf("\nNome da lista: ");
-// 	scanf("%s", lista->nome);
-//
-// 	fflush(stdin);
-// 	printf("Descricao da lista: ");
-// 	for (int i = 0; lista->descricao[i] != '\0'; ++i)
-// 	{
-// 		scanf("%c", &lista->descricao[i]);
-// 	}
-//
-//
-// 	adicionarLista(lista->nome);
-// }
-//
-//
-// // Função que vai adicionar as Listas no arquivo
-// void adicionarLista(char nome[])
-// {
-// 	Tarefas *lista = (Tarefas*) malloc(sizeof(Tarefas));
-//
-// 	if(lista == NULL)
-// 	{
-// 		printf("\nFalha ao alocar memoria!\n");
-// 	}
-//
-// }
-*/
+
+void imprimirTarefas(TLista lista){
+  TCelula* aux = lista.primeiro;
+  while (aux->prox != NULL){
+    printf("%s\n", aux->prox->item.descricao);
+    aux = aux->prox;
+  }
+}
 
 void FLVazia(TLista* lista){
   lista->primeiro = (TCelula*) malloc(sizeof(TCelula));
@@ -102,3 +58,37 @@ void InserirLista(TLista *lista, TDado item){
   }
 }
 */
+
+void menuInicial()
+{
+	int opcao;
+
+	printf("1 - Adicionar Lista de Tarefas\n");
+	printf("2 - Remover Lista de Tarefas\n");
+	printf("3 - Abrir Lista de Tarefas\n");
+	printf("4 - Listar Tarefas de um Período\n");
+	printf("5 - Sair\n\n");
+}
+
+void menuOpcao03(TLista *lista, TDado *dado){
+	int opcao;
+
+	printf("1 - Adicionar Tarefas\n");
+	printf("2 - Imprimir tarefas\n");
+	printf("3 - Remover Tarefas\n");
+	printf("4 - Marcar como 'FEITA'\n");
+	printf("5 - Marcar como 'NAO FEITA'\n");
+	printf("6 - Mudar prioridade de item\n");
+	printf("7 - Voltar ao menu anterior\n");
+
+	scanf("%d", &opcao);
+
+	switch (opcao) {
+		case 1:
+		lerDados(dado);
+		InserirLista(lista, *dado);
+		break;
+		case 2:
+		imprimirTarefas(*lista);
+	}
+}

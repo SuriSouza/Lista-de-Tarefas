@@ -24,7 +24,7 @@ typedef struct lista {
   int tam;
 } TLista;
 
-//void menuInicial();
+void menuInicial();
 // void criarLista();
 // void adicionarLista();
 void FLVazia(TLista* lista);

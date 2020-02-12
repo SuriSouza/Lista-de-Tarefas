@@ -12,22 +12,28 @@ int main(int argc, char const *argv[])
 	TDado dado01;
 
 	do{
-		menuInicial();
+		MenuInicial();
 		scanf("%d", &opcao);
 
 		switch (opcao) {
 			case 1:
-			FLVazia(&lista01);
-			printf("Dê um nome para sua lista de tarefas:\n");
-			scanf("%s", &lista01.nome);
+				FLVazia(&lista01);
+				printf("Dê um nome para sua lista de tarefas:\n");
+				scanf("%s", &lista01.nome);
+				InserirLista(&lista01, dado01);
+			break;
+
+			case 2:
+				//ImprimirLista(lista01, dado01);
+				ExcluirLista(&lista01, dado01);
 			break;
 
 			case 3:
-			menuOpcao03(&lista01, &dado01);
+				MenuOpcao03(&lista01, &dado01);
 			break;
 
 			case 5:
-			resposta = 'n';
+				resposta = 'n';
 			break;
 		}
 	}

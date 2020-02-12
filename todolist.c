@@ -1,65 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include "todolist.h"
 
 // Primeira interação com o usuário: Menu Inicial
 
-void lerDados(TDado *dado){
-	printf("Adicione uma descricao de ate 50 caracteres:\n");
-	__fpurge(stdin);
-	fgets(dado->descricao, 50, stdin);
-}
-
-void imprimirTarefas(TLista lista){
-  TCelula* aux = lista.primeiro;
-  while (aux->prox != NULL){
-    printf("%s\n", aux->prox->item.descricao);
-    aux = aux->prox;
-  }
-}
-
-void FLVazia(TLista* lista){
-  lista->primeiro = (TCelula*) malloc(sizeof(TCelula));
-  lista->ultimo = lista->primeiro;
-  lista->primeiro->prox = NULL;
-  lista->tam = 0;
-}
-
-void InserirLista(TLista *lista, TDado item){
-  lista->ultimo->prox = (TCelula*)malloc(sizeof(TCelula));
-  lista->ultimo = lista->ultimo->prox;
-  lista->ultimo->prox = NULL;
-  lista->ultimo->item = item;
-  lista->tam++;
-}
-
-/*TCelula* PesquisarLista(TLista lista, TDado item){
-  TCelula* aux = lista.primeiro;
-  while (aux->prox != NULL){
-    if(aux->prox->item.id == item.id) return aux;
-    else aux = aux->prox;
-  }
-  return NULL;
-}*/
-
-/*void ExcluirLista(TLista *lista, TDado item){
-  TCelula* endereco = PesquisarLista(*(lista), item);
-  if(endereco != NULL){
-    TCelula* aux;
-    aux = endereco->prox->prox;
-    free(endereco->prox);
-    endereco->prox = aux;
-    lista->tam--;
-
-    if(endereco->prox == NULL)
-    lista->ultimo = endereco;
-  }
-}
-*/
-
-void menuInicial()
+void MenuInicial()
 {
 	int opcao;
 
@@ -70,7 +18,80 @@ void menuInicial()
 	printf("5 - Sair\n\n");
 }
 
-void menuOpcao03(TLista *lista, TDado *dado){
+
+void FLVazia(TLista* lista)
+{
+  lista->primeiro = (TCelula*) malloc(sizeof(TCelula));
+  lista->ultimo = lista->primeiro;
+  lista->primeiro->prox = NULL;
+  lista->tam = 0;
+}
+
+void InserirLista(TLista *lista, TDado item)
+{
+  lista->ultimo->prox = (TCelula*)malloc(sizeof(TCelula));
+  lista->ultimo = lista->ultimo->prox;
+  lista->ultimo->prox = NULL;
+  lista->ultimo->item = item;
+  lista->tam++;
+}
+
+/*void ImprimirLista(TLista lista, TDado item)
+{
+  printf("%s\n", lista.nome);   
+}*/
+
+TCelula* PesquisarLista(TLista lista, TDado item)
+{
+  TCelula* aux = lista.primeiro;
+  while (aux->prox != NULL)
+  {
+    if(aux->prox->item.descricao == item.descricao) return aux;
+    else aux = aux->prox;
+  }
+  return NULL;
+}
+
+void ExcluirLista(TLista *lista, TDado item)
+{
+
+  TCelula* endereco = PesquisarLista(*lista, item);
+  if(endereco != NULL)
+  {
+    TCelula* aux;
+    aux = endereco->prox->prox;
+    free(endereco->prox);
+    endereco->prox = aux;
+    lista->tam--;
+
+    if(endereco->prox == NULL)
+    lista->ultimo = endereco;
+  }
+
+  printf("\n\n\n%s\n\n\n\n", lista->nome);
+}
+
+
+void LerDados(TDado *dado)
+{
+	printf("Adicione uma descricao de ate 50 caracteres:\n");
+	__fpurge(stdin);
+	fgets(dado->descricao, 50, stdin);
+}
+
+void ImprimirTarefas(TLista lista){
+  TCelula* aux = lista.primeiro;
+  while (aux->prox != NULL){
+    printf("%s\n", aux->prox->item.descricao);
+    aux = aux->prox;
+  }
+}
+
+
+
+
+
+void MenuOpcao03(TLista *lista, TDado *dado){
 	int opcao;
 
 	printf("1 - Adicionar Tarefas\n");
@@ -85,10 +106,10 @@ void menuOpcao03(TLista *lista, TDado *dado){
 
 	switch (opcao) {
 		case 1:
-		lerDados(dado);
-		InserirLista(lista, *dado);
+		  LerDados(dado);
+		  InserirLista(lista, *dado);
 		break;
 		case 2:
-		imprimirTarefas(*lista);
+		  ImprimirTarefas(*lista);
 	}
 }

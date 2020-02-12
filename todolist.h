@@ -24,10 +24,10 @@ typedef struct lista {
   int tam;
 } TLista;
 
-void menuInicial();
-// void criarLista();
-// void adicionarLista();
+void MenuInicial();
 void FLVazia(TLista* lista);
 void InserirLista(TLista *lista, TDado item);
+void ImprimirLista(TLista lista, TDado item);
 TCelula* PesquisarLista(TLista lista, TDado item);
-//void ExcluirLista(TLista *lista, TDado item);
+void ExcluirLista(TLista *lista, TDado item);
+void MenuOpcao03(TLista *lista, TDado *dado);

@@ -5,12 +5,6 @@ typedef struct tdata{
   int ano;
 } TData;
 
-typedef struct thora{
-  int hora;
-  int min;
-  int seg;
-}THora;
-
 typedef struct Tarefas
 {
 	char descricao[50];
@@ -21,7 +15,7 @@ typedef struct Tarefas
 typedef struct Lista
 {
 	char nome[20];
-	Tarefas *tarefa;
+	TLista tarefa;
 }Lista;
 
 void menuInicial();

@@ -18,16 +18,11 @@ typedef struct celula {
 } TCelula;
 
 typedef struct lista {
+	char nome[20];
   TCelula* primeiro;
   TCelula* ultimo;
   int tam;
 } TLista;
-
-typedef struct ListaTarefas
-{
-	char nome[20];
-	TLista tarefa;
-}ListaTarefas;
 
 void menuInicial();
 void criarLista();

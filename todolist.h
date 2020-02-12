@@ -1,7 +1,20 @@
+
+typedef struct tdata{
+  int dia;
+  int mes;
+  int ano;
+} TData;
+
+typedef struct thora{
+  int hora;
+  int min;
+  int seg;
+}THora;
+
 typedef struct Tarefas
 {
-	char nome[20];
 	char descricao[50];
+	TData data;
 	bool estado;
 }Tarefas;
 

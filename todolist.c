@@ -5,7 +5,7 @@
 #include "todolist.h"
 
 // Primeira interação com o usuário: Menu Inicial
-void menuInicial()
+/*void menuInicial()
 {
 	int opcao;
 
@@ -25,7 +25,7 @@ void menuInicial()
 		printf("Opcao inválida!\n");
 	}
 }
-
+*/
 /*
 // void criarLista()
 // {
@@ -88,7 +88,7 @@ void InserirLista(TLista *lista, TDado item){
   return NULL;
 }*/
 
-void ExcluirLista(TLista *lista, TDado item){
+/*void ExcluirLista(TLista *lista, TDado item){
   TCelula* endereco = PesquisarLista(*(lista), item);
   if(endereco != NULL){
     TCelula* aux;
@@ -101,3 +101,4 @@ void ExcluirLista(TLista *lista, TDado item){
     lista->ultimo = endereco;
   }
 }
+*/

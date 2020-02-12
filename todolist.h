@@ -5,19 +5,34 @@ typedef struct tdata{
   int ano;
 } TData;
 
-typedef struct Tarefas
+typedef struct Dado
 {
 	char descricao[50];
 	TData data;
 	bool estado;
-}Tarefas;
+}TDado;
 
-typedef struct Lista
+typedef struct celula {
+  TDado item;
+  struct celula* prox;
+} TCelula;
+
+typedef struct lista {
+  TCelula* primeiro;
+  TCelula* ultimo;
+  int tam;
+} TLista;
+
+typedef struct ListaTarefas
 {
 	char nome[20];
 	TLista tarefa;
-}Lista;
+}ListaTarefas;
 
 void menuInicial();
 void criarLista();
 void adicionarLista();
+void FLVazia(TLista* lista);
+void InserirLista(TLista *lista, TDado item);
+TCelula* PesquisarLista(TLista lista, TDado item);
+void ExcluirLista(TLista *lista, TDado item);

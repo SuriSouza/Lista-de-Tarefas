@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "list.h"
 #include "todolist.h"
 
 int main(int argc, char const *argv[])

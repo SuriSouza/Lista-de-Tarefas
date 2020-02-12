@@ -1,15 +1,16 @@
 typedef struct Tarefas
 {
-	char nome;
-	char descricao;
+	char nome[20];
+	char descricao[50];
 	bool estado;
-}Tarefas
+}Tarefas;
 
 typedef struct Lista
 {
+	char nome[20];
 	Tarefas *tarefa;
 }Lista;
 
-
 void menuInicial();
 void criarLista();
+void adicionarLista();

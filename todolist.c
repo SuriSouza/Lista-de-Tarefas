@@ -1,5 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
+
+#include "todolist.h"
 
 // Primeira interação com o usuário: Menu Inicial
 void menuInicial()
@@ -26,7 +29,7 @@ void menuInicial()
 
 void criarLista()
 {
-	Lista *lista = (Lista*) malloc(sizeof(Lista));
+	Tarefas *lista = (Tarefas*) malloc(sizeof(Tarefas));
 
 	if(lista == NULL)
 	{
@@ -34,11 +37,15 @@ void criarLista()
 	}
 
 	printf("\nNome da lista: ");
-	scanf("%s", &lista->nome);
-	
-	printf("%s\n", lista->nome);
+	scanf("%s", lista->nome);
 
-	lista->prox = NULL;
+	fflush(stdin);
+	printf("Descricao da lista: ");
+	for (int i = 0; lista->descricao[i] != '\0'; ++i)
+	{
+		scanf("%c", &lista->descricao[i]);	
+	}
+	
 
 	adicionarLista(lista->nome);
 }
@@ -47,18 +54,11 @@ void criarLista()
 // Função que vai adicionar as Listas no arquivo
 void adicionarLista(char nome[])
 {
-	Lista *lista = (Lista*) malloc(sizeof(Lista));
+	Tarefas *lista = (Tarefas*) malloc(sizeof(Tarefas));
 
 	if(lista == NULL)
 	{
 		printf("\nFalha ao alocar memoria!\n");
 	}
 
-	lista->nome = nome;
-	lista->prox = NULL;
-
-	atual->prox = lista;
-	atual = lista;
-
-	print(lista);
 }

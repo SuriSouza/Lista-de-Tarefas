@@ -29,15 +29,21 @@ typedef struct listaDeListas {
   struct listaDeListas* prox;
 } TListadeListas;
 
-void ImprimirListas (TListadeListas* listaDeListas);
-TListadeListas *buscaListas (char nome[], TListadeListas* listaDeListas);
-void removerLista(TListadeListas* listaDeListas);
-void criaLista(TListadeListas* listaDeListas);
 void MenuInicial();
 void FLVazia(TLista* lista);
 void InserirLista(TLista *lista, TDado item);
-void ImprimirLista(TLista lista, TDado item);
 TCelula* PesquisarLista(TLista lista, int posicao);
 void ExcluirLista(TLista *lista, int posicao);
-void MenuOpcao03(TLista *lista);
+void alterarPrioridade(TLista *lista, int posicaoAtual, int posicaoDesejada);
+void LerDados(TDado *dado);
+void ImprimirTarefas(TLista *lista);
+void ImprimirTarefa(TLista *lista, int posicao);
+void alterarEstadoPFeita(TLista *lista, int posicao);
+void alterarEstadoPNaoFeita(TLista *lista, int posicao);
+void ImprimeElemento(TDado item);
 void imprimirPorPeriodo(TListadeListas *listaDeListas);
+void MenuOpcao03(TLista *lista);
+void criaLista(TListadeListas* listaDeListas);
+void ImprimirListas (TListadeListas* listaDeListas);
+TListadeListas *buscaListas (char nome[], TListadeListas* listaDeListas);
+void removerLista(TListadeListas* listaDeListas);

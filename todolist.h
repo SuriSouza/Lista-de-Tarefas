@@ -29,11 +29,14 @@ typedef struct listaDeListas {
   struct listaDeListas* prox;
 } TListadeListas;
 
+void ImprimirListas (TListadeListas* listaDeListas);
+TListadeListas *buscaListas (char nome[], TListadeListas* listaDeListas);
+void removerLista(TListadeListas* listaDeListas);
 void criaLista(TListadeListas* listaDeListas);
 void MenuInicial();
 void FLVazia(TLista* lista);
-void InserirLista(TLista *lista, TDado item);
+void InserirLista(TLista lista, TDado item);
 void ImprimirLista(TLista lista, TDado item);
 TCelula* PesquisarLista(TLista lista, int posicao);
 void ExcluirLista(TLista *lista, int posicao);
-void MenuOpcao03(TLista *lista, TDado *dado);
+void MenuOpcao03(TLista *lista);

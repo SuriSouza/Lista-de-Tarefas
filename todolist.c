@@ -6,7 +6,6 @@
 #include "todolist.h"
 
 // Primeira interação com o usuário: Menu Inicial
-
 void MenuInicial()
 {
 	int opcao;
@@ -28,13 +27,13 @@ void FLVazia(TLista* lista)
   lista->tam = 0;
 }
 
-void InserirLista(TLista *lista, TDado item)
+void InserirLista(TLista lista, TDado item)
 {
-  lista->ultimo->prox = (TCelula*)malloc(sizeof(TCelula));
-  lista->ultimo = lista->ultimo->prox;
-  lista->ultimo->prox = NULL;
-  lista->ultimo->item = item;
-  lista->tam++;
+  lista.ultimo->prox = (TCelula*)malloc(sizeof(TCelula));
+  lista.ultimo = lista.ultimo->prox;
+  lista.ultimo->prox = NULL;
+  lista.ultimo->item = item;
+  lista.tam++;
 }
 
 TCelula* PesquisarLista(TLista lista, int posicao)
@@ -101,9 +100,9 @@ void LerDados(TDado *dado)
 	fgets(dado->descricao, 50, stdin);
 }
 
-void ImprimirTarefas(TLista lista){
+void ImprimirTarefas(TLista *lista){
 	int posicao = 1;
-  TCelula* aux = lista.primeiro->prox;
+  TCelula* aux = lista->primeiro->prox;
   while (aux->prox != NULL){
 		printf("\tID tarefa: [%d] --->\t", posicao);
 		posicao++;
@@ -133,8 +132,11 @@ void alterarEstadoPNaoFeita(TLista *lista, int posicao){
 		endereco->item.estado = true;
 }
 
-void MenuOpcao03(TLista *lista, TDado *dado){
+void MenuOpcao03(TLista *lista){
 	int opcao, id, posicaoAtual, posicaoDesejada;
+	TDado dado;
+
+	strcpy(dado.descricao, "ssssss");
 
 	printf("1 - Adicionar Tarefas\n");
 	printf("2 - Imprimir tarefas\n");
@@ -147,13 +149,17 @@ void MenuOpcao03(TLista *lista, TDado *dado){
 
 	switch (opcao) {
 		case 1:
-		  LerDados(dado);
-		  InserirLista(lista, *dado);
+		  LerDados(&dado);
+		  InserirLista(*lista, dado);
+			InserirLista(*lista, dado);
+			InserirLista(*lista, dado);
+			InserirLista(*lista, dado);
+			
 		break;
 		case 2:
-		  ImprimirTarefas(*lista);
+		  ImprimirTarefas(lista);
 		break;
-		case 3:
+		/*case 3:
 			ImprimirTarefas(*lista);
 			printf("Digite o ID da tarefa que deseja remover:");
 			__fpurge(stdin);
@@ -186,11 +192,12 @@ void MenuOpcao03(TLista *lista, TDado *dado){
 			break;
 			default:
 				printf(">>>>> OPCAO INVALIDA <<<<<\n");
-	}
+	*/}
 }
 
 void criaLista(TListadeListas* listaDeListas){
 	TListadeListas* listadl = (TListadeListas*)malloc(sizeof(TListadeListas));
+	FLVazia(&listadl->lista);
 	printf("Digite o nome da lista:  ");
 	__fpurge(stdin);
 	fgets(listadl->lista.nome,20,stdin);

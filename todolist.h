@@ -40,3 +40,4 @@ void ImprimirLista(TLista lista, TDado item);
 TCelula* PesquisarLista(TLista lista, int posicao);
 void ExcluirLista(TLista *lista, int posicao);
 void MenuOpcao03(TLista *lista);
+void imprimirPorPeriodo(TListadeListas *listaDeListas);

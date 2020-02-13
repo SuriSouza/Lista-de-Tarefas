@@ -54,6 +54,10 @@ int main(int argc, char const *argv[])
 			else printf(">>>>> NÃO ENCONTRADO <<<<<\n");
 			break;
 
+			case 5:
+			imprimirPorPeriodo(&listaDeListas);
+			break;
+
 			case 6:
 				resposta = 'n';
 			break;

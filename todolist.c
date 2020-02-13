@@ -153,8 +153,8 @@ void ImprimeElemento(TDado item){
 
 void imprimirPorPeriodo(TListadeListas *listaDeListas){
 	int posicao = 1;
-	int sinaliza01 = 0;
-	int sinaliza02 = 0;
+	int sinaliza01;
+	int sinaliza02;
 	TData dataAuxInferior, dataAuxSuperior;
 	TListadeListas *listaDeListasAuxiliar = listaDeListas;
 
@@ -183,6 +183,8 @@ void imprimirPorPeriodo(TListadeListas *listaDeListas){
 	while(listaDeListasAuxiliar->prox != NULL){
 		TCelula* aux = listaDeListasAuxiliar->prox->lista.primeiro;
 		while (aux->prox != NULL){
+			sinaliza01 = 0;
+			sinaliza02 = 0;
 			if (aux->prox->item.data.ano >= dataAuxInferior.ano){
 				if (aux->prox->item.data.mes >= dataAuxInferior.mes){
 					if (aux->prox->item.data.dia >= dataAuxInferior.dia){
@@ -197,10 +199,8 @@ void imprimirPorPeriodo(TListadeListas *listaDeListas){
 					}
 				}
 			}
-			if (sinaliza01 == 1)
-			if (sinaliza02 == 1)
-			ImprimeElemento(aux->prox->item);
-
+			if (sinaliza01 == 1 && sinaliza02 == 1)
+				ImprimeElemento(aux->prox->item);
 			aux = aux->prox;
 		}
 		listaDeListasAuxiliar = listaDeListasAuxiliar->prox;

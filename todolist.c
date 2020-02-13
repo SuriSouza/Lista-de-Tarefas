@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <stdio.h>
+#include <stdio_ext.h>
 #include <stdbool.h>
 #include <string.h>
 
@@ -12,10 +12,11 @@ void MenuInicial()
 	int opcao;
 
 	printf("1 - Adicionar Lista de Tarefas\n");
-	printf("2 - Remover Lista de Tarefas\n");
-	printf("3 - Abrir Lista de Tarefas\n");
-	printf("4 - Listar Tarefas de um Período\n");
-	printf("5 - Sair\n\n");
+	printf("2 - Imprimir nomes das listas\n");
+	printf("3 - Remover Lista de Tarefas\n");
+	printf("4 - Abrir Lista de Tarefas\n");
+	printf("5 - Listar Tarefas de um Período\n");
+	printf("6 - Sair\n\n");
 }
 
 
@@ -35,11 +36,6 @@ void InserirLista(TLista *lista, TDado item)
   lista->ultimo->item = item;
   lista->tam++;
 }
-
-/*void ImprimirLista(TLista lista, TDado item)
-{
-  printf("%s\n", lista.nome);
-}*/
 
 TCelula* PesquisarLista(TLista lista, int posicao)
 {
@@ -191,4 +187,38 @@ void MenuOpcao03(TLista *lista, TDado *dado){
 			default:
 				printf(">>>>> OPCAO INVALIDA <<<<<\n");
 	}
+}
+
+void criaLista(TListadeListas* listaDeListas){
+	TListadeListas* listadl = (TListadeListas*)malloc(sizeof(TListadeListas));
+	printf("Digite o nome da lista:  ");
+	__fpurge(stdin);
+	fgets(listadl->lista.nome,20,stdin);
+	listadl -> prox = listaDeListas -> prox;
+	listaDeListas -> prox = listadl;
+}
+
+void ImprimirListas (TListadeListas* listaDeListas){
+  int posicao = 1;
+	TListadeListas* ldlaux = listaDeListas;
+  while (ldlaux->prox != NULL){
+		printf("\tlista [%d] : --->\t", posicao);
+		printf("%s", ldlaux->prox->lista.nome);
+		ldlaux = ldlaux->prox;
+		posicao++;
+  }
+}
+
+TListadeListas* buscaListas (char nome[], TListadeListas* listaDeListas){
+	TListadeListas* listadl = listaDeListas;
+	while(listadl->prox != NULL)
+		if (strcmp(listadl->lista.nome, nome)) return listadl;
+		listadl = listadl->prox;
+	return NULL;
+}
+
+void removerLista(TListadeListas* listaDeListas){
+	TListadeListas* aux = listaDeListas->prox;
+	listaDeListas->prox = aux -> prox;
+	free(aux);
 }

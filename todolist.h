@@ -24,6 +24,12 @@ typedef struct lista {
   int tam;
 } TLista;
 
+typedef struct listaDeListas {
+  TLista lista;
+  struct listaDeListas* prox;
+} TListadeListas;
+
+void criaLista(TListadeListas* listaDeListas);
 void MenuInicial();
 void FLVazia(TLista* lista);
 void InserirLista(TLista *lista, TDado item);

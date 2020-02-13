@@ -1,38 +1,41 @@
 #include <stdlib.h>
 #include <stdio_ext.h>
 #include <stdbool.h>
-
+#include <string.h>
 #include "todolist.h"
 
 int main(int argc, char const *argv[])
 {
 	char resposta = 's';
+	char nomeaux[20];
 	int opcao;
-	TLista lista01;
-	TDado dado01;
-
+	TListadeListas *listaDeListas;
+	TListadeListas *listaAux;
+	listaDeListas->prox = NULL;
 	do{
 		MenuInicial();
 		scanf("%d", &opcao);
 
 		switch (opcao) {
 			case 1:
-				FLVazia(&lista01);
-				printf("Dê um nome para sua lista de tarefas:\n");
-				scanf("%s", &lista01.nome);
-				InserirLista(&lista01, dado01);
-			break;
+			criaLista(listaDeListas);
+				break;
 
 			case 2:
-				//ImprimirLista(lista01, dado01);
-				//ExcluirLista(&lista01, dado01);
+				ImprimirListas(listaDeListas);
 			break;
 
 			case 3:
-				MenuOpcao03(&lista01, &dado01);
+				printf("Digite o nome da lista que deseja remover: \n");
+				__fpurge(stdin);
+				fgets(nomeaux,20,stdin);
+				listaAux = buscaListas(nomeaux, listaDeListas);
+				printf("ACHEI\n");
+				if (listaAux != NULL) removerLista(listaAux);
+				else printf(">>>>> NÃO ENCONTRADO <<<<<\n");
 			break;
 
-			case 5:
+			case 6:
 				resposta = 'n';
 			break;
 		}

@@ -18,31 +18,31 @@ void MenuInicial()
 	printf("6 - Sair\n\n");
 }
 
-
-void FLVazia(TLista* lista)
-{
+//Responsavel por fazer uma lista vazia
+void FLVazia(TLista* lista){
   lista->primeiro = (TCelula*) malloc(sizeof(TCelula));
   lista->ultimo = lista->primeiro;
   lista->primeiro->prox = NULL;
   lista->tam = 0;
 }
 
-void InserirLista(TLista lista, TDado item)
-{
-  lista.ultimo->prox = (TCelula*)malloc(sizeof(TCelula));
-  lista.ultimo = lista.ultimo->prox;
-  lista.ultimo->prox = NULL;
-  lista.ultimo->item = item;
-  lista.tam++;
+//Responsavel por inserir um elemento na lista
+void InserirLista(TLista *lista, TDado item){
+  lista->ultimo->prox = (TCelula*)malloc(sizeof(TCelula));
+  lista->ultimo = lista->ultimo->prox;
+  lista->ultimo->prox = NULL;
+  lista->ultimo->item = item;
+  lista->tam++;
 }
 
+//Responsavel por pesquisar um elemento na lista
 TCelula* PesquisarLista(TLista lista, int posicao)
 {
   TCelula* aux = lista.primeiro;
 	if (posicao >= 0 && posicao < lista.tam){
   while (aux->prox != NULL)
   {
-		while (posicao !=-1 && aux->prox != NULL){
+		while (posicao !=0 && aux->prox != NULL){
     		aux = aux->prox;
 				posicao--;
 			}
@@ -53,6 +53,7 @@ TCelula* PesquisarLista(TLista lista, int posicao)
   return NULL;
 }
 
+//Responsavel por excluir um elemento da lista (nao utilizei)
 void ExcluirLista(TLista *lista, int posicao)
 {
 	posicao--;
@@ -102,12 +103,12 @@ void LerDados(TDado *dado)
 
 void ImprimirTarefas(TLista *lista){
 	int posicao = 1;
-  TCelula* aux = lista->primeiro->prox;
+  TCelula* aux = lista->primeiro;
   while (aux->prox != NULL){
 		printf("\tID tarefa: [%d] --->\t", posicao);
 		posicao++;
     printf("%s", aux->prox->item.descricao);
-		printf("%s\n\n", aux->prox->item.estado ? "\t[NAO FEITA]" : "\t[FEITA]");
+		printf("%s\n\n", aux->prox->item.estado ? "\t[FEITA]" : "\t[NAO FEITA]");
     aux = aux->prox;
   }
 }
@@ -123,20 +124,18 @@ void ImprimirTarefa(TLista *lista, int posicao){
 void alterarEstadoPFeita(TLista *lista, int posicao){
 	TCelula* endereco = PesquisarLista(*lista, posicao);
 	if (endereco != NULL)
-		endereco->item.estado = false;
+		endereco->item.estado = true;
 }
 
 void alterarEstadoPNaoFeita(TLista *lista, int posicao){
 	TCelula* endereco = PesquisarLista(*lista, posicao);
 	if (endereco != NULL)
-		endereco->item.estado = true;
+		endereco->item.estado = false;
 }
 
 void MenuOpcao03(TLista *lista){
 	int opcao, id, posicaoAtual, posicaoDesejada;
 	TDado dado;
-
-	strcpy(dado.descricao, "ssssss");
 
 	printf("1 - Adicionar Tarefas\n");
 	printf("2 - Imprimir tarefas\n");
@@ -150,38 +149,34 @@ void MenuOpcao03(TLista *lista){
 	switch (opcao) {
 		case 1:
 		  LerDados(&dado);
-		  InserirLista(*lista, dado);
-			InserirLista(*lista, dado);
-			InserirLista(*lista, dado);
-			InserirLista(*lista, dado);
-			
+		  InserirLista(lista, dado);
 		break;
 		case 2:
-		  ImprimirTarefas(lista);
+		ImprimirTarefas(lista);
 		break;
-		/*case 3:
-			ImprimirTarefas(*lista);
+		case 3:
+			ImprimirTarefas(lista);
 			printf("Digite o ID da tarefa que deseja remover:");
 			__fpurge(stdin);
 			scanf("%d", &id);
 			ExcluirLista(lista, id);
 			break;
 		case 4:
-			ImprimirTarefas(*lista);
+			ImprimirTarefas(lista);
 			printf("Digite o ID da tarefa que deseja marcar como 'FEITA':");
 			__fpurge(stdin);
 			scanf("%d", &id);
 			alterarEstadoPFeita(lista, id);
 			break;
 		case 5:
-			ImprimirTarefas(*lista);
+			ImprimirTarefas(lista);
 			printf("Digite o ID da tarefa que deseja marcar como 'NAO FEITA':");
 			__fpurge(stdin);
 			scanf("%d", &id);
 			alterarEstadoPNaoFeita(lista, id);
 			break;
 		case 6:
-			ImprimirTarefas(*lista);
+			ImprimirTarefas(lista);
 			printf("Digite a tarefa em que deseja mudar de prioridade:  \n");
 			__fpurge(stdin);
 			scanf("%d", &posicaoAtual);
@@ -192,7 +187,7 @@ void MenuOpcao03(TLista *lista){
 			break;
 			default:
 				printf(">>>>> OPCAO INVALIDA <<<<<\n");
-	*/}
+	}
 }
 
 void criaLista(TListadeListas* listaDeListas){

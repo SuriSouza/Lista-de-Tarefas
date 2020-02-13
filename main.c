@@ -41,24 +41,17 @@ int main(int argc, char const *argv[])
 			break;
 
 			case 4:
-			MenuOpcao03(&listaDeListas->prox->lista);
-			printf("%s\n", &listaDeListas->prox->lista.primeiro->prox->item.descricao);
-			if (&listaDeListas->prox->lista.ultimo->prox == NULL)
-			printf("null\n");
-			else printf("naonull\n");
-			//printf("%s\n", &listaDeListas->prox->lista.primeiro->prox->prox->item.descricao);
-			//ImprimirTarefas(&listaDeListas->prox->lista);
-			//printf("%s\n", listaDeListas->prox->lista.ultimo->item.descricao);
-
-				/*ImprimirListas(listaDeListas);
-				printf("Digite o nome da Lista que deseja modificar\n");
-				__fpurge(stdin);
-				fgets(nomeaux,20,stdin);
-				listaAux = buscaListas(nomeaux, listaDeListas);
+			ImprimirListas(listaDeListas);
+			printf("Digite o nome da lista que deseja modificar: \n");
+			__fpurge(stdin);
+			fgets(nomeaux,20,stdin);
+			listaAux = buscaListas(nomeaux, listaDeListas);
 				if (listaAux != NULL){
-					if (listaDeListas->prox != NULL && strcmp(listaDeListas->prox->lista.nome, nomeaux) == 0)
-					MenuOpcao03(&listaDeListas->prox->lista);
-				else MenuOpcao03(&listaAux->prox->lista);}*/
+				if (listaDeListas->prox != NULL && strcmp(listaDeListas->prox->lista.nome, nomeaux) == 0)
+				MenuOpcao03(&listaDeListas->prox->lista);
+				else MenuOpcao03(&listaAux->prox->lista);
+			}
+			else printf(">>>>> NÃO ENCONTRADO <<<<<\n");
 			break;
 
 			case 6:

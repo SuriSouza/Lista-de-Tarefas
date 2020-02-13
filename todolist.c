@@ -209,16 +209,17 @@ void ImprimirListas (TListadeListas* listaDeListas){
   }
 }
 
-TListadeListas* buscaListas (char nome[], TListadeListas* listaDeListas){
+TListadeListas *buscaListas (char nome[], TListadeListas* listaDeListas){
 	TListadeListas* listadl = listaDeListas;
-	while(listadl->prox != NULL)
-		if (strcmp(listadl->lista.nome, nome)) return listadl;
+	while(listadl->prox != NULL){
+		if (strcmp(listadl->prox->lista.nome, nome)==0)	return listadl;
 		listadl = listadl->prox;
+	}
 	return NULL;
 }
 
 void removerLista(TListadeListas* listaDeListas){
 	TListadeListas* aux = listaDeListas->prox;
-	listaDeListas->prox = aux -> prox;
+	listaDeListas->prox = listaDeListas->prox->prox;
 	free(aux);
 }

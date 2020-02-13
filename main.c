@@ -30,8 +30,11 @@ int main(int argc, char const *argv[])
 				__fpurge(stdin);
 				fgets(nomeaux,20,stdin);
 				listaAux = buscaListas(nomeaux, listaDeListas);
-				printf("ACHEI\n");
-				if (listaAux != NULL) removerLista(listaAux);
+					if (listaAux != NULL){
+					if (listaDeListas->prox != NULL && strcmp(listaDeListas->prox->lista.nome, nomeaux) == 0)
+					removerLista(listaDeListas);
+					else removerLista(listaAux);
+				}
 				else printf(">>>>> NÃO ENCONTRADO <<<<<\n");
 			break;
 

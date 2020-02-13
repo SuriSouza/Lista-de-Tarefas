@@ -28,6 +28,6 @@ void MenuInicial();
 void FLVazia(TLista* lista);
 void InserirLista(TLista *lista, TDado item);
 void ImprimirLista(TLista lista, TDado item);
-TCelula* PesquisarLista(TLista lista, TDado item);
-void ExcluirLista(TLista *lista, TDado item);
+TCelula* PesquisarLista(TLista lista, int posicao);
+void ExcluirLista(TLista *lista, int posicao);
 void MenuOpcao03(TLista *lista, TDado *dado);

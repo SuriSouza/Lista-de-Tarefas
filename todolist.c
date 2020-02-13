@@ -38,24 +38,30 @@ void InserirLista(TLista *lista, TDado item)
 
 /*void ImprimirLista(TLista lista, TDado item)
 {
-  printf("%s\n", lista.nome);   
+  printf("%s\n", lista.nome);
 }*/
 
-TCelula* PesquisarLista(TLista lista, TDado item)
+TCelula* PesquisarLista(TLista lista, int posicao)
 {
   TCelula* aux = lista.primeiro;
+	if (posicao >= 0 && posicao < lista.tam){
   while (aux->prox != NULL)
   {
-    if(aux->prox->item.descricao == item.descricao) return aux;
-    else aux = aux->prox;
-  }
+		while (posicao !=-1 && aux->prox != NULL){
+    		aux = aux->prox;
+				posicao--;
+			}
+			return aux;
+		}
+	}
+	printf(">>>>> POSICAO INVALIDA <<<<<\n");
   return NULL;
 }
 
-void ExcluirLista(TLista *lista, TDado item)
+void ExcluirLista(TLista *lista, int posicao)
 {
-
-  TCelula* endereco = PesquisarLista(*lista, item);
+	posicao--;
+  TCelula* endereco = PesquisarLista(*lista, posicao);
   if(endereco != NULL)
   {
     TCelula* aux;
@@ -67,8 +73,6 @@ void ExcluirLista(TLista *lista, TDado item)
     if(endereco->prox == NULL)
     lista->ultimo = endereco;
   }
-
-  printf("\n\n\n%s\n\n\n\n", lista->nome);
 }
 
 
@@ -80,11 +84,20 @@ void LerDados(TDado *dado)
 }
 
 void ImprimirTarefas(TLista lista){
-  TCelula* aux = lista.primeiro;
+	int posicao = 1;
+  TCelula* aux = lista.primeiro->prox;
   while (aux->prox != NULL){
-    printf("%s\n", aux->prox->item.descricao);
+		printf("\tID tarefa: [%d] --->\t", posicao);
+		posicao++;
+    printf("%s\n\n", aux->prox->item.descricao);
     aux = aux->prox;
   }
+}
+
+void ImprimirTarefa(TLista *lista, int posicao){
+	TCelula* endereco = PesquisarLista(*lista, posicao);
+	if (endereco != NULL)
+	printf("\tID tarefa: [%d] --->\t%s\n\n", posicao, endereco->item.descricao);
 }
 
 
@@ -93,6 +106,7 @@ void ImprimirTarefas(TLista lista){
 
 void MenuOpcao03(TLista *lista, TDado *dado){
 	int opcao;
+	int id;
 
 	printf("1 - Adicionar Tarefas\n");
 	printf("2 - Imprimir tarefas\n");
@@ -111,5 +125,13 @@ void MenuOpcao03(TLista *lista, TDado *dado){
 		break;
 		case 2:
 		  ImprimirTarefas(*lista);
+		break;
+		case 3:
+			ImprimirTarefas(*lista);
+			printf("Digite o ID da tarefa que deseja remover:");
+			__fpurge(stdin);
+			scanf("%d", &id);
+			ExcluirLista(lista, id);
+
 	}
 }

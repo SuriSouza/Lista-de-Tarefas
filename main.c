@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
 
 			case 2:
 				//ImprimirLista(lista01, dado01);
-				ExcluirLista(&lista01, dado01);
+				//ExcluirLista(&lista01, dado01);
 			break;
 
 			case 3:

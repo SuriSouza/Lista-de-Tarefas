@@ -75,6 +75,28 @@ void ExcluirLista(TLista *lista, int posicao)
   }
 }
 
+void alterarPrioridade(TLista *lista, int posicaoAtual, int posicaoDesejada)
+{
+	posicaoAtual--;
+	posicaoDesejada--;
+  TCelula* enderecoAtual = PesquisarLista(*lista, posicaoAtual);
+	TCelula* enderecoDesejado = PesquisarLista(*lista, posicaoDesejada);
+  if(enderecoAtual != NULL && posicaoDesejada > 0 && posicaoDesejada < lista->tam)
+  {
+    TCelula* aux;
+		TCelula* aux2;
+		TCelula* aux3;
+    aux = enderecoAtual->prox->prox;
+		aux3 = enderecoAtual->prox;
+    enderecoAtual->prox = aux;
+		aux2 = enderecoDesejado->prox;
+		enderecoDesejado->prox = aux3;
+		enderecoDesejado->prox->prox = aux2;
+
+    if(enderecoAtual->prox == NULL)
+    lista->ultimo = enderecoAtual;
+  }
+}
 
 void LerDados(TDado *dado)
 {
@@ -89,24 +111,34 @@ void ImprimirTarefas(TLista lista){
   while (aux->prox != NULL){
 		printf("\tID tarefa: [%d] --->\t", posicao);
 		posicao++;
-    printf("%s\n\n", aux->prox->item.descricao);
+    printf("%s", aux->prox->item.descricao);
+		printf("%s\n\n", aux->prox->item.estado ? "\t[NAO FEITA]" : "\t[FEITA]");
     aux = aux->prox;
   }
 }
 
 void ImprimirTarefa(TLista *lista, int posicao){
 	TCelula* endereco = PesquisarLista(*lista, posicao);
-	if (endereco != NULL)
-	printf("\tID tarefa: [%d] --->\t%s\n\n", posicao, endereco->item.descricao);
+	if (endereco != NULL){
+		printf("\tID tarefa: [%d] --->\t%s\n", posicao, endereco->item.descricao);
+		printf("%s\n\n", endereco->item.estado ? "\t[NAO FEITA]" : "\t[FEITA]");
+	}
 }
 
+void alterarEstadoPFeita(TLista *lista, int posicao){
+	TCelula* endereco = PesquisarLista(*lista, posicao);
+	if (endereco != NULL)
+		endereco->item.estado = false;
+}
 
-
-
+void alterarEstadoPNaoFeita(TLista *lista, int posicao){
+	TCelula* endereco = PesquisarLista(*lista, posicao);
+	if (endereco != NULL)
+		endereco->item.estado = true;
+}
 
 void MenuOpcao03(TLista *lista, TDado *dado){
-	int opcao;
-	int id;
+	int opcao, id, posicaoAtual, posicaoDesejada;
 
 	printf("1 - Adicionar Tarefas\n");
 	printf("2 - Imprimir tarefas\n");
@@ -114,7 +146,6 @@ void MenuOpcao03(TLista *lista, TDado *dado){
 	printf("4 - Marcar como 'FEITA'\n");
 	printf("5 - Marcar como 'NAO FEITA'\n");
 	printf("6 - Mudar prioridade de item\n");
-	printf("7 - Voltar ao menu anterior\n");
 
 	scanf("%d", &opcao);
 
@@ -132,6 +163,32 @@ void MenuOpcao03(TLista *lista, TDado *dado){
 			__fpurge(stdin);
 			scanf("%d", &id);
 			ExcluirLista(lista, id);
-
+			break;
+		case 4:
+			ImprimirTarefas(*lista);
+			printf("Digite o ID da tarefa que deseja marcar como 'FEITA':");
+			__fpurge(stdin);
+			scanf("%d", &id);
+			alterarEstadoPFeita(lista, id);
+			break;
+		case 5:
+			ImprimirTarefas(*lista);
+			printf("Digite o ID da tarefa que deseja marcar como 'NAO FEITA':");
+			__fpurge(stdin);
+			scanf("%d", &id);
+			alterarEstadoPNaoFeita(lista, id);
+			break;
+		case 6:
+			ImprimirTarefas(*lista);
+			printf("Digite a tarefa em que deseja mudar de prioridade:  \n");
+			__fpurge(stdin);
+			scanf("%d", &posicaoAtual);
+			printf("Digite a posicao desejada:  \n");
+			__fpurge(stdin);
+			scanf("%d", &posicaoDesejada);
+			alterarPrioridade(lista, posicaoAtual, posicaoDesejada);
+			break;
+			default:
+				printf(">>>>> OPCAO INVALIDA <<<<<\n");
 	}
 }

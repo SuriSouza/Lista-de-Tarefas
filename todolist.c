@@ -18,6 +18,26 @@ void MenuInicial()
 	printf("6 - Sair\n\n");
 }
 
+void gravarTexto(TDado dado, char nome[]){
+	FILE *arq = fopen(dado.descricao, "w");
+	fprintf(arq, "\tlista: %s\n", nome);
+	fprintf(arq,"\t--> %s", dado.descricao);
+	fprintf(arq,"%s\t\t Data: [ %d / %d / %d ]\n\n", dado.estado ? "\t[FEITA]" : "\t[NAO FEITA]", dado.data.dia, dado.data.mes, dado.data.ano);
+	fclose(arq);
+}
+
+void apagarTexto(char descricao[]){
+	FILE *arq = fopen ( descricao, "r" );
+
+	if (arq) {
+		fclose(arq);
+		printf("Removido");
+		remove(descricao);
+	}
+	else
+	printf("Nao existe nehum %s", descricao);
+}
+
 //Responsavel por fazer uma lista vazia
 void FLVazia(TLista* lista){
 	lista->primeiro = (TCelula*) malloc(sizeof(TCelula));
@@ -62,6 +82,7 @@ void ExcluirLista(TLista *lista, int posicao)
 	{
 		TCelula* aux;
 		aux = endereco->prox->prox;
+		apagarTexto(endereco->prox->item.descricao);
 		free(endereco->prox);
 		endereco->prox = aux;
 		lista->tam--;
@@ -207,7 +228,6 @@ void imprimirPorPeriodo(TListadeListas *listaDeListas){
 	}
 
 }
-
 void MenuOpcao03(TLista *lista){
 	int opcao, id, posicaoAtual, posicaoDesejada;
 	TDado dado;
@@ -225,6 +245,7 @@ void MenuOpcao03(TLista *lista){
 		case 1:
 		LerDados(&dado);
 		InserirLista(lista, dado);
+		gravarTexto(dado, lista->nome);
 		break;
 		case 2:
 		ImprimirTarefas(lista);

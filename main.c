@@ -12,10 +12,10 @@ int main(int argc, char const *argv[])
 	int opcao;
 	TListadeListas listaDeListas;
 	TListadeListas *listaAux;
-	
+
 	FLVazia(&listaDeListas.lista);
 	listaDeListas.prox = NULL;
-	
+
 	do{
 		MenuInicial();
 		scanf("%d", &opcao);
@@ -23,10 +23,17 @@ int main(int argc, char const *argv[])
 		switch (opcao) {
 			case 1:
 				criaLista(&listaDeListas);
+				printf("\n\t>>>>> LISTA CRIADA <<<<<\n");
+				printf("\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR\n");
+				__fpurge(stdin);
+				getchar();
 			break;
 
 			case 2:
 				ImprimirListas(&listaDeListas);
+				printf("\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR\n");
+				__fpurge(stdin);
+				getchar();
 			break;
 
 			case 3:
@@ -35,14 +42,18 @@ int main(int argc, char const *argv[])
 				__fpurge(stdin);
 				fgets(nomeaux,20,stdin);
 				listaAux = buscaListas(nomeaux, &listaDeListas);
-				
+
 				if (listaAux != NULL){
 					if (listaDeListas.prox != NULL && strcmp(listaDeListas.prox->lista.nome, nomeaux) == 0)
 						removerLista(&listaDeListas);
-					else 
+					else
 						removerLista(listaAux);
+						printf("\n\t>>>>> LISTA REMOVIDA <<<<<\n");
 				}
 				else printf(">>>>> NÃO ENCONTRADO <<<<<\n");
+				printf("\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR\n");
+				__fpurge(stdin);
+				getchar();
 			break;
 
 			case 4:
@@ -51,11 +62,11 @@ int main(int argc, char const *argv[])
 				__fpurge(stdin);
 				fgets(nomeaux,20,stdin);
 				listaAux = buscaListas(nomeaux, &listaDeListas);
-				
+
 				if (listaAux != NULL){
 					if (listaDeListas.prox != NULL && strcmp(listaDeListas.prox->lista.nome, nomeaux) == 0)
 						MenuOpcao04(&listaDeListas.prox->lista);
-					else 
+					else
 						MenuOpcao04(&listaAux->prox->lista);
 				}
 				else printf(">>>>> NÃO ENCONTRADO <<<<<\n");
@@ -63,6 +74,9 @@ int main(int argc, char const *argv[])
 
 			case 5:
 				imprimirPorPeriodo(&listaDeListas);
+				printf("\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR\n");
+				__fpurge(stdin);
+				getchar();
 			break;
 
 			case 6:

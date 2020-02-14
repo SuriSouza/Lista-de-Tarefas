@@ -8,14 +8,22 @@
 // Primeira interação com o usuário: Menu Inicial
 void MenuInicial()
 {
+	system("clear");
 	int opcao;
 
-	printf("\n1 - Adicionar Lista de Tarefas\n");
-	printf("2 - Imprimir nomes das listas\n");
-	printf("3 - Remover Lista de Tarefas\n");
-	printf("4 - Abrir Lista de Tarefas\n");
-	printf("5 - Listar Tarefas de um Período\n");
-	printf("6 - Sair\n\n");
+	printf("\n\t████████╗ ██████╗     ██████╗  ██████╗     ██╗     ██╗███████╗████████╗");
+	printf("\n\t╚══██╔══╝██╔═══██╗    ██╔══██╗██╔═══██╗    ██║     ██║██╔════╝╚══██╔══╝");
+	printf("\n\t   ██║   ██║   ██║    ██║  ██║██║   ██║    ██║     ██║███████╗   ██║   ");
+	printf("\n\t   ██║   ██║   ██║    ██║  ██║██║   ██║    ██║     ██║╚════██║   ██║   ");
+	printf("\n\t   ██║   ╚██████╔╝    ██████╔╝╚██████╔╝    ███████╗██║███████║   ██║   ");
+	printf("\n\t   ╚═╝    ╚═════╝     ╚═════╝  ╚═════╝     ╚══════╝╚═╝╚══════╝   ╚═╝   ");
+
+	printf("\n\t1 --> Adicionar Lista de Tarefas\n");
+	printf("\t2 --> Imprimir nomes das listas\n");
+	printf("\t3 --> Remover Lista de Tarefas\n");
+	printf("\t4 --> Abrir Lista de Tarefas\n");
+	printf("\t5 --> Listar Tarefas de um Período\n");
+	printf("\t6 --> Sair\n\n");
 }
 
 // Função que grava os dados em um arquivo de texto
@@ -26,10 +34,10 @@ void gravarTexto(TDado dado, char nome[]){
 	fprintf(arq,"%s\t\t Data: [ %d / %d / %d ]\n\n", dado.estado ? "\t[FEITA]" : "\t[NAO FEITA]", dado.data.dia, dado.data.mes, dado.data.ano);
 	fclose(arq);
 
-	printf("\nINFORMACOES SALVAS EM ARQUIVO DE TEXTO!\n");
+	printf("\n\t\tINFORMACOES SALVAS EM ARQUIVO DE TEXTO!\n");
 }
 
-// Função que remove os dados do arquivo de texto 
+// Função que remove os dados do arquivo de texto
 void apagarTexto(char descricao[]){
 	FILE *arq = fopen ( descricao, "r" );
 
@@ -63,7 +71,7 @@ void InserirLista(TLista *lista, TDado item){
 TCelula* PesquisarLista(TLista lista, int posicao)
 {
 	TCelula* aux = lista.primeiro;
-	if (posicao >= 0 && posicao < lista.tam){
+	if (posicao >= 0 && posicao <= lista.tam){
 		while (aux->prox != NULL)
 		{
 			while (posicao !=0 && aux->prox != NULL){
@@ -139,7 +147,7 @@ void LerDados(TDado *dado)
 
 // Função responsável por imprimir as tarefas da lista selecionada
 void ImprimirTarefas(TLista *lista){
-	int posicao = 0;
+	int posicao = 1;
 	TCelula* aux = lista->primeiro;
 	while (aux->prox != NULL){
 		printf("\tID tarefa: [%d] --->\t", posicao);
@@ -147,15 +155,6 @@ void ImprimirTarefas(TLista *lista){
 		printf("%s", aux->prox->item.descricao);
 		printf("%s\t\t Data: [ %d / %d / %d ]\n\n", aux->prox->item.estado ? "\t[FEITA]" : "\t[NAO FEITA]", aux->prox->item.data.dia, aux->prox->item.data.mes, aux->prox->item.data.ano);
 		aux = aux->prox;
-	}
-}
-
-// Função respnsável por imprimir a tarefa selecionada para poder modificar seu estado
-void ImprimirTarefa(TLista *lista, int posicao){
-	TCelula* endereco = PesquisarLista(*lista, posicao);
-	if (endereco != NULL){
-		printf("\tID tarefa: [%d] --->\t%s\n", posicao, endereco->item.descricao);
-		printf("%s\t\tData: [ %d / %d / %d ]\n\n", endereco->item.estado ? "\t[NAO FEITA]" : "\t[FEITA]", endereco->prox->item.data.dia, endereco->prox->item.data.mes, endereco->prox->item.data.ano);
 	}
 }
 
@@ -192,11 +191,11 @@ void imprimirPorPeriodo(TListadeListas *listaDeListas){
 	printf("\nDigite o dia:  ");
 	__fpurge(stdin);
 	scanf("%d", &dataAuxInferior.dia);
-	
+
 	printf("Digite o mes (numero):  ");
 	__fpurge(stdin);
 	scanf("%d", &dataAuxInferior.mes);
-	
+
 	printf("Digite o ano:  ");
 	__fpurge(stdin);
 	scanf("%d", &dataAuxInferior.ano);
@@ -205,11 +204,11 @@ void imprimirPorPeriodo(TListadeListas *listaDeListas){
 	printf("\nDigite o dia:  ");
 	__fpurge(stdin);
 	scanf("%d", &dataAuxSuperior.dia);
-	
+
 	printf("Digite o mes (numero):  ");
 	__fpurge(stdin);
 	scanf("%d", &dataAuxSuperior.mes);
-	
+
 	printf("Digite o ano:  ");
 	__fpurge(stdin);
 	scanf("%d", &dataAuxSuperior.ano);
@@ -243,15 +242,23 @@ void imprimirPorPeriodo(TListadeListas *listaDeListas){
 
 // Menu de interação para opção 4 do menu anterior
 void MenuOpcao04(TLista *lista){
+	system("clear");
 	int opcao, id, posicaoAtual, posicaoDesejada;
 	TDado dado;
 
-	printf("\n1 - Adicionar Tarefas\n");
-	printf("2 - Imprimir tarefas\n");
-	printf("3 - Remover Tarefas\n");
-	printf("4 - Marcar como 'FEITA'\n");
-	printf("5 - Marcar como 'NAO FEITA'\n");
-	printf("6 - Mudar prioridade de item\n\n");
+	printf("\n\t████████╗ ██████╗     ██████╗  ██████╗     ██╗     ██╗███████╗████████╗");
+	printf("\n\t╚══██╔══╝██╔═══██╗    ██╔══██╗██╔═══██╗    ██║     ██║██╔════╝╚══██╔══╝");
+	printf("\n\t   ██║   ██║   ██║    ██║  ██║██║   ██║    ██║     ██║███████╗   ██║   ");
+	printf("\n\t   ██║   ██║   ██║    ██║  ██║██║   ██║    ██║     ██║╚════██║   ██║   ");
+	printf("\n\t   ██║   ╚██████╔╝    ██████╔╝╚██████╔╝    ███████╗██║███████║   ██║   ");
+	printf("\n\t   ╚═╝    ╚═════╝     ╚═════╝  ╚═════╝     ╚══════╝╚═╝╚══════╝   ╚═╝   ");
+
+	printf("\n1 --> Adicionar Tarefas\n");
+	printf("2 --> Imprimir tarefas\n");
+	printf("3 --> Remover Tarefas\n");
+	printf("4 --> Marcar como 'FEITA'\n");
+	printf("5 --> Marcar como 'NAO FEITA'\n");
+	printf("6 --> Mudar prioridade de item\n\n");
 
 	scanf("%d", &opcao);
 
@@ -260,18 +267,27 @@ void MenuOpcao04(TLista *lista){
 			LerDados(&dado);
 			InserirLista(lista, dado);
 			gravarTexto(dado, lista->nome);
+			printf("\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR\n");
+			__fpurge(stdin);
+			getchar();
 		break;
 
 		case 2:
 			ImprimirTarefas(lista);
+			printf("\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR\n");
+			__fpurge(stdin);
+			getchar();
 		break;
-		
+
 		case 3:
 			ImprimirTarefas(lista);
 			printf("Digite o ID da tarefa que deseja remover: ");
 			__fpurge(stdin);
 			scanf("%d", &id);
 			ExcluirLista(lista, id);
+			printf("\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR\n");
+			__fpurge(stdin);
+			getchar();
 		break;
 
 		case 4:
@@ -280,6 +296,9 @@ void MenuOpcao04(TLista *lista){
 			__fpurge(stdin);
 			scanf("%d", &id);
 			alterarEstadoPFeita(lista, id);
+			printf("\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR\n");
+			__fpurge(stdin);
+			getchar();
 		break;
 
 		case 5:
@@ -288,6 +307,9 @@ void MenuOpcao04(TLista *lista){
 			__fpurge(stdin);
 			scanf("%d", &id);
 			alterarEstadoPNaoFeita(lista, id);
+			printf("\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR\n");
+			__fpurge(stdin);
+			getchar();
 		break;
 
 		case 6:
@@ -299,10 +321,16 @@ void MenuOpcao04(TLista *lista){
 			__fpurge(stdin);
 			scanf("%d", &posicaoDesejada);
 			alterarPrioridade(lista, posicaoAtual, posicaoDesejada);
+			printf("\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR\n");
+			__fpurge(stdin);
+			getchar();
 		break;
 
 		default:
 			printf(">>>>> OPCAO INVALIDA <<<<<\n");
+			printf("\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR\n");
+			__fpurge(stdin);
+			getchar();
 	}
 }
 
@@ -310,7 +338,7 @@ void MenuOpcao04(TLista *lista){
 void criaLista(TListadeListas* listaDeListas){
 	TListadeListas* listadl = (TListadeListas*)malloc(sizeof(TListadeListas));
 	FLVazia(&listadl->lista);
-	
+
 	printf("Digite o nome da lista:  ");
 	__fpurge(stdin);
 	fgets(listadl->lista.nome,20,stdin);
